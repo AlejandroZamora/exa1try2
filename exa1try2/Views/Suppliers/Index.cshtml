@@ -1,0 +1,67 @@
+﻿@model IEnumerable<exa1try2.Models.Supplier>
+
+@{
+    ViewData["Title"] = "Supplier Index";
+}
+
+<h1>Supplier Index</h1>
+
+<div class="container mt-4">
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <form asp-controller="Suppliers" asp-action="Index" method="get" class="form-inline">
+                <div class="form-group">
+                    <input type="text" name="stringBusqueda" class="form-control mr-2" placeholder="Search by name">
+                </div>
+                <button type="submit" class="btn btn-dark">Search</button>
+            </form>
+        </div>
+        <div class="col-md-6 text-right">
+            <a asp-action="Create" class="btn btn-primary">Create New Supplier</a>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Company Name</th>
+                    <th>Contact Name</th>
+                    <th>Contact Title</th>
+                    <th>Address</th>
+                    <th>City</th>
+                    <th>Region</th>
+                    <th>Postal Code</th>
+                    <th>Country</th>
+                    <th>Phone</th>
+                    <th>Fax</th>
+                    <th>Home Page</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.CompanyName)</td>
+                        <td>@Html.DisplayFor(modelItem => item.ContactName)</td>
+                        <td>@Html.DisplayFor(modelItem => item.ContactTitle)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Address)</td>
+                        <td>@Html.DisplayFor(modelItem => item.City)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Region)</td>
+                        <td>@Html.DisplayFor(modelItem => item.PostalCode)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Country)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Phone)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Fax)</td>
+                        <td>@Html.DisplayFor(modelItem => item.HomePage)</td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.SupplierId" class="btn btn-primary btn-sm">Edit</a>
+                            <a asp-action="Details" asp-route-id="@item.SupplierId" class="btn btn-info btn-sm">Details</a>
+                            <a asp-action="Delete" asp-route-id="@item.SupplierId" class="btn btn-danger btn-sm">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

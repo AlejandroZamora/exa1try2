@@ -1,4 +1,6 @@
+using exa1try2.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.EntityFrameworkCore;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,6 +8,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+builder.Services.AddDbContext<DbexamenContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("cadenaSQL")));
 
 
 builder.Services.AddAuthentication(

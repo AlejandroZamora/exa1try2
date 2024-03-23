@@ -1,0 +1,83 @@
+﻿@model exa1try2.Models.Category
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit Category</h1>
+
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Edit" method="post" id="EditCategoryForm">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <input type="hidden" asp-for="CategoryId" />
+
+            <div class="form-group">
+                <label asp-for="CategoryName" class="control-label">Category Name:</label>
+                <input asp-for="CategoryName" class="form-control" />
+                <span asp-validation-for="CategoryName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Description" class="control-label">Description:</label>
+                <textarea asp-for="Description" class="form-control" rows="4"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Picture" class="control-label">Picture URL:</label>
+                <input asp-for="Picture" class="form-control" />
+                <span asp-validation-for="Picture" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mt-4">
+                <button type="submit" class="btn btn-primary">Save</button>
+                <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
+@section Scripts {
+
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        $(function () {
+            $('#EditCategoryForm').validate({
+                rules: {
+                    CategoryName: "required",
+                    Description: "required"
+                },
+                messages: {
+                    CategoryName: "Por favor ingrese su nombre",
+                    Description: "Por favor ingrese su mensaje"
+                },
+                errorClass: "is-invalid",
+                validClass: "is-valid",
+                errorElement: "div",
+                errorPlacement: function (error, element) {
+                    error.addClass("invalid-feedback");
+                    error.insertAfter(element);
+                },
+                success: function (label, element) {
+                    $(element).addClass("is-valid");
+                    $(element).next('.invalid-feedback').remove();
+                },
+                highlight: function (element, errorClass, validClass) {
+                    $(element).addClass(errorClass).removeClass(validClass);
+                    $(element).next('.invalid-feedback').remove();
+                },
+                unhighlight: function (element, errorClass, validClass) {
+                    $(element).addClass(validClass).removeClass(errorClass);
+                    $(element).next('.invalid-feedback').remove();
+                },
+                submitHandler: function (form) {
+                    // Aquí puedes agregar la lógica para enviar el formulario utilizando AJAX
+                    alert('Formulario enviado exitosamente!');
+                    form.submit();
+                }
+            });
+        });
+    </script>
+}
