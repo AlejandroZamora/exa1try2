@@ -14,6 +14,5 @@ public partial class Category
     public string? Description { get; set; }
     [Display(Name = "Fotografia")]
     public string? Picture { get; set; }
-
     public virtual ICollection<Product> Products { get; set; } = new List<Product>();
 }
